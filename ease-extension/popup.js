@@ -8,6 +8,7 @@ const CONTENT_SCRIPT_FILES = [
   "content/utils/dom.js",
   "content/modes/contrastMode.js",
   "content/modes/readingMode.js",
+  "content/modes/focusMode.js",
   "content/contentScript.js"
 ];
 
@@ -132,8 +133,14 @@ document.getElementById("focus").addEventListener("click", async () => {
 
   focusEnabled = !focusEnabled;
 
-  chrome.tabs.sendMessage(tab.id, {
+  sendMessageWithInjection(tab.id, {
     type: "TOGGLE_FOCUS_MODE",
     enabled: focusEnabled
+  }, (err, res) => {
+    if (err) {
+      console.error("SendMessage error:", err.message);
+      return;
+    }
+    console.log("Focus Mode response:", res);
   });
 });
