@@ -3,6 +3,7 @@ let enabled = false;
 const CONTENT_SCRIPT_FILES = [
   "content/utils/dom.js",
   "content/modes/contrastMode.js",
+  "content/modes/readingMode.js",
   "content/contentScript.js"
 ];
 
@@ -60,6 +61,29 @@ document.getElementById("reading").addEventListener("click", async () => {
     { type: "TOGGLE_READING_MODE", enabled: readingEnabled },
     (res) => {
       if (chrome.runtime.lastError) {
+        if (chrome.runtime.lastError.message.includes("Receiving end does not exist")) {
+          chrome.scripting.executeScript(
+            {
+              target: { tabId: tab.id },
+              files: CONTENT_SCRIPT_FILES
+            },
+            () => {
+              chrome.tabs.sendMessage(
+                tab.id,
+                { type: "TOGGLE_READING_MODE", enabled: readingEnabled },
+                (res2) => {
+                  if (chrome.runtime.lastError) {
+                    console.error("SendMessage error:", chrome.runtime.lastError.message);
+                    return;
+                  }
+                  console.log("Reading Mode response:", res2);
+                }
+              );
+            }
+          );
+          return;
+        }
+
         console.error("SendMessage error:", chrome.runtime.lastError.message);
         return;
       }

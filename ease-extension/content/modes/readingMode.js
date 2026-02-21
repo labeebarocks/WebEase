@@ -1,8 +1,7 @@
 (() => {
   const STYLE_ID = "ease-reading-mode-style";
 
-  // IMPORTANT: this path must match where you placed the font file
-  const fontUrl = chrome.runtime.getURL("content/assets/WebEase/ease-extension/content/assets/opendyslexic-regular-webfont.woff2");
+  const fontUrl = chrome.runtime.getURL("content/assets/opendyslexic-regular-webfont.woff2");
 
   const CSS = `
     @font-face {
