@@ -3,6 +3,7 @@ let enabled = false;
 const CONTENT_SCRIPT_FILES = [
   "content/utils/dom.js",
   "content/modes/contrastMode.js",
+  "content/modes/seizureSafe.js",
   "content/contentScript.js"
 ];
 
@@ -44,5 +45,38 @@ document.getElementById("highContrast").addEventListener("click", async () => {
     }
     if (err) console.error("SendMessage error:", err.message);
     else console.log("Response:", res);
+  });
+});
+
+
+
+
+// Seizure Safe Mode
+let seizureEnabled = false;
+
+function sendToggleSeizure(tabId, enabled, callback) {
+  chrome.tabs.sendMessage(
+    tabId,
+    { type: "TOGGLE_SEIZURE_SAFE", enabled },
+    (res) => {
+      if (chrome.runtime.lastError) {
+        callback(chrome.runtime.lastError);
+        return;
+      }
+      callback(null, res);
+    }
+  );
+}
+
+document.getElementById("seizure").addEventListener("click", async () => {
+  
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (!tab?.id) return;
+
+  seizureEnabled = !seizureEnabled;
+
+  sendToggleSeizure(tab.id, seizureEnabled, (err, res) => {
+    if (err) console.error(err.message);
+    else console.log(res);
   });
 });
