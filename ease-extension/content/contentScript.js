@@ -31,3 +31,11 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
     return sendResponse({ ok: false, error: String(e) });
   }
 });
+
+if (msg?.type === "TOGGLE_FOCUS_MODE") {
+  const mode = window.__EASE_MODES__?.focusMode;
+  if (!mode) return sendResponse({ ok: false, error: "focusMode not found" });
+
+  msg.enabled ? mode.enable() : mode.disable();
+  return sendResponse({ ok: true });
+}

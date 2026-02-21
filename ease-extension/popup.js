@@ -123,3 +123,17 @@ async function initializeReadingFontSelection() {
 }
 
 initializeReadingFontSelection();
+
+let focusEnabled = false;
+
+document.getElementById("focus").addEventListener("click", async () => {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (!tab?.id) return;
+
+  focusEnabled = !focusEnabled;
+
+  chrome.tabs.sendMessage(tab.id, {
+    type: "TOGGLE_FOCUS_MODE",
+    enabled: focusEnabled
+  });
+});
