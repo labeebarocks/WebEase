@@ -1,0 +1,4 @@
+/* example focus outline */
+:focus {
+  outline: 3px solid blue !important;
+}
