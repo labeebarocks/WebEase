@@ -1,15 +1,17 @@
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-  if (msg.type === "TOGGLE_SEIZURE_SAFE") {
-    if (msg.enabled) window.easeSeizureSafe.enableSeizureSafe();
-    else window.easeSeizureSafe.disableSeizureSafe();
-    sendResponse({ ok: true });
-    return;
-  }
+console.log("[Ease] content script loaded");
 
-  if (msg.type === "TOGGLE_HIGH_CONTRAST") {
-    if (msg.enabled) window.easeHighContrast.enableHighContrast();
-    else window.easeHighContrast.disableHighContrast();
-    sendResponse({ ok: true });
-    return;
+chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
+  try {
+    if (msg?.type === "TOGGLE_HIGH_CONTRAST") {
+      const mode = window.__EASE_MODES__?.highContrast;
+      if (!mode) return sendResponse({ ok: false, error: "highContrast mode not found" });
+
+      msg.enabled ? mode.enable() : mode.disable();
+      return sendResponse({ ok: true });
+    }
+
+    return sendResponse({ ok: false, error: "unknown message type" });
+  } catch (e) {
+    return sendResponse({ ok: false, error: String(e) });
   }
 });

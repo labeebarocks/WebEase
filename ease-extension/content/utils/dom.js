@@ -1,11 +1,9 @@
-(function () {
-  function injectStyleTag(id, cssText) {
-    const existing = document.getElementById(id);
-    if (existing) return;
-
+(() => {
+  function injectStyleTag(id, css) {
+    if (document.getElementById(id)) return;
     const style = document.createElement("style");
     style.id = id;
-    style.textContent = cssText;
+    style.textContent = css;
     document.documentElement.appendChild(style);
   }
 
@@ -14,5 +12,6 @@
     if (el) el.remove();
   }
 
-  window.easeDOM = { injectStyleTag, removeStyleTag };
+  // expose globally (so other files can use it without import)
+  window.__EASE_DOM__ = { injectStyleTag, removeStyleTag };
 })();
