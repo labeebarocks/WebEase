@@ -70,11 +70,10 @@ WebEase/
 ```
 
 ## Future Works 
--  SeizureMode which disables animations and pauses videos to prevent flashing triggers.
-- Expand automated scanning and issue detection  
-- Add contextual explanations for accessibility violations  
-- Support granular color customization  
-- Publish WebEase publicly on the Chrome Web Store  
+- Introduce GrayScale Mode for users with colour sensitivity needs
+- Launch Seizure Safe Mode which disables animations and pauses videos to prevent flashing triggers.
+- Support theme customization for Contrast Mode
+- Publish WebEase publicly on the Chrome Web Store 
 ---
 
 ## Credits
