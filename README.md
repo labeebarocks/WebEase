@@ -75,3 +75,7 @@ WebEase/
 ## Credits
 
 Built for **HackED 2026** - DivE 
+
+### Demo Presentation Slides
+
+https://docs.google.com/presentation/d/12LKN0tW8RdcWlu8arxfcGp0HZkTxt5V5fYcbWICHZwQ/edit?usp=sharing
