@@ -9,7 +9,6 @@ Toggle modes like high contrast, reading fonts, seizure-safe, focus highlighting
 
 | Mode | What it does |
 |------|----------------|
-| **Seizure Safe** | Stops CSS animations and transitions, pauses all video and audio, disables smooth scroll. Turn off to restore. Aligns with WCAG 2.3. |
 | **High Contrast** | Black background, white text, cyan links, yellow focus rings. Reduces eye strain and improves readability. |
 | **Reading Mode** | Applies a reading-friendly font (OpenDyslexic, Lexend, or Comic Sans), increased line height and letter spacing. Keeps code blocks in monospace. |
 | **Focus Mode** | Dims the page and highlights the block under your cursor (paragraph/section). Helps focus on one area (ADHD-friendly). |
