@@ -1,7 +1,7 @@
 # WebEase
 
 **An adaptive accessibility Chrome extension that makes any webpage easier to use.**  
-Toggle modes like high contrast, reading fonts, seizure-safe, focus highlighting, and motor (keyboard) support—per tab. No APIs, no paid services. Pure frontend.
+Toggle modes like high contrast, reading fonts, seizure-safe, focus highlighting, and motor (keyboard) support—per tab.
 
 ---
 
@@ -74,5 +74,4 @@ WebEase/
 
 ## Credits
 
-Built for **HackED 2026**, aligned with DivE accessibility goals (keyboard navigability, WCAG, ARIA awareness).  
-Universal Design principles • No APIs • No ML • High impact.
+Built for **HackED 2026** - DivE 
