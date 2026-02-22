@@ -16,6 +16,7 @@ body {
 	margin: 0;
 	padding: 14px;
 	padding-top: 4px;
+	min-height: 100vh;
 	font-family: "Segoe UI", Arial, sans-serif;
 	background: linear-gradient(180deg, var(--ease-cream) 0%, var(--ease-pink) 100%);
 	color: var(--ease-blue);
@@ -151,6 +152,62 @@ button:focus-visible {
 .mode-focus { --mode-accent: var(--ease-pink); }
 .mode-motor { --mode-accent: var(--ease-sage); }
 
+/* Tooltip container */
+.tooltip-wrapper {
+  position: relative;
+}
+
+/* Tooltip box */
+.tooltip {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 6px;
+
+  width: 230px;
+  padding: 10px 12px;
+
+  border-radius: 12px;
+  font-size: 11px;
+  line-height: 1.4;
+
+  background: rgba(255, 251, 254, 0.92);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(132, 124, 183, 0.25);
+
+  box-shadow: 0 10px 25px rgba(132, 124, 183, 0.18);
+
+  color: var(--ease-blue);
+
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 10;
+}
+
+/* Arrow */
+.tooltip::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 18px;
+
+  width: 10px;
+  height: 10px;
+
+  background: inherit;
+  border-left: 1px solid rgba(132, 124, 183, 0.25);
+  border-top: 1px solid rgba(132, 124, 183, 0.25);
+
+  transform: rotate(45deg);
+}
+
+/* Show tooltip on hover */
+.tooltip-wrapper:hover .tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 #seizure {
 	background: var(--ease-rose);
