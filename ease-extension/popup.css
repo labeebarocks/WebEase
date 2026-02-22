@@ -24,10 +24,11 @@ body {
 
 h3 {
 	margin: 0 0 12px;
-	font-size: 22px;
+	font-family: "Fredoka One", sans-serif;
+	font-size: 25px;
 	font-weight: 700;
-	letter-spacing: 0.2px;
-	color: var(--ease-purple);
+	letter-spacing: 1.5px;
+	color: var(--ease-blue);
 	display: flex;
 	justify-content: center;
 }

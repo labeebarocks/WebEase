@@ -189,30 +189,34 @@ async function initializePopup() {
 
 initializePopup();
 
-document.getElementById("seizure").addEventListener("click", async () => {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  if (!tab?.id) return;
-  
-  if (isRestrictedUrl(tab.url)) {
-    setIndicator("seizureSafe", "na");
-    return;
-  }
-  
-  const next = !seizureEnabled;
-  
-  // optimistic UI is optional; I prefer updating after success
-  sendMessageWithInjection(tab.id, { type: "TOGGLE_SEIZURE_SAFE", enabled: next }, (err, res) => {
-    if (err) {
-      console.error("Seizure Safe error:", err.message);
+const seizureBtn = document.getElementById("seizure");
+if (seizureBtn) {
+  seizureBtn.addEventListener("click", async () => {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab?.id) return;
+    
+    if (isRestrictedUrl(tab.url)) {
       setIndicator("seizureSafe", "na");
       return;
     }
     
-    seizureEnabled = next;
-    setTabState(tab.id, { seizureSafe: seizureEnabled });
-    setIndicator("seizureSafe", seizureEnabled ? "enabled" : "disabled");
+    const next = !seizureEnabled;
+    
+    // optimistic UI is optional; I prefer updating after success
+    sendMessageWithInjection(tab.id, { type: "TOGGLE_SEIZURE_SAFE", enabled: next }, (err, res) => {
+      if (err) {
+        console.error("Seizure Safe error:", err.message);
+        setIndicator("seizureSafe", "na");
+        return;
+      }
+      
+      seizureEnabled = next;
+      setTabState(tab.id, { seizureSafe: seizureEnabled });
+      setIndicator("seizureSafe", seizureEnabled ? "enabled" : "disabled");
+    });
   });
-});
+}
+
 
 document.getElementById("highContrast").addEventListener("click", async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
